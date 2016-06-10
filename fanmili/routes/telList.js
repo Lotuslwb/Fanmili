@@ -13,4 +13,9 @@ router.get('/', function (req, res, next) {
     res.render('list', data);
 });
 
+
+router.get('/test', function (req, res, next) {
+    res.json(data);
+});
+
 module.exports = router;

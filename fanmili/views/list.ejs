@@ -1,4 +1,4 @@
-<%-include header.ejs%>
+<%- include header.ejs %>
 
 <h1><%= title %></h1>
 <ul>
@@ -9,4 +9,18 @@
     <% } %>
 </ul>
 
-<%-include footer.ejs%>
+<%- include footer.ejs %>
+
+<script src="/javascripts/jquery.js"></script>
+<script>
+    var url = '/telList/test';
+    $.ajax({
+        type: 'GET',
+        url: url,
+        data: {},
+        success: function (data) {
+            console.log(data.title);
+        },
+        dataType: 'json'
+    });
+</script>
