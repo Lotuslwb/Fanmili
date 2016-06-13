@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "mongodb": "^2.1.21",
-    "mongoose": "^4.4.20"
+    "mongoose": "^4.4.20",
+    "xlsx": "^0.8.0"
   }
 }
