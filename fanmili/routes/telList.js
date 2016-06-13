@@ -6,24 +6,26 @@ var Person = require('../models/DB');
 var user = new Person();
 var data = {
     name: '李文彬',
-    tel: '111',
+    tel: '99999',
     gender: '男',
     age: '12'
 }
 
-user.find({}, function (err, docs) {
-    var data = {
-        title: 'telList', telList: docs
-    }
-    router.get('/', function (req, res, next) {
-        res.render('list', data);
-    });
+user.add(data, function (err) {
+    user.find({}, function (err, docs) {
+        var data = {
+            title: 'telList', telList: docs
+        }
+        router.get('/', function (req, res, next) {
+            res.render('list', data);
+        });
 
 
-    router.get('/test', function (req, res, next) {
-        res.json(data);
-    });
-})
+        router.get('/test', function (req, res, next) {
+            res.json(data);
+        });
+    })
+});
 
 
 module.exports = router;
