@@ -1,21 +1,29 @@
 var express = require('express');
 var router = express.Router();
+var Person = require('../models/DB');
 
 /* GET home page. */
+var user = new Person();
 var data = {
-    title: 'telList', telList: [
-        {'name': '李文彬', 'tel': '18616172907'},
-        {'name': '何婷婷', 'tel': '110'}
-    ]
+    name: '李文彬',
+    tel: '111',
+    gender: '男',
+    age: '12'
 }
 
-router.get('/', function (req, res, next) {
-    res.render('list', data);
-});
+user.find({}, function (err, docs) {
+    var data = {
+        title: 'telList', telList: docs
+    }
+    router.get('/', function (req, res, next) {
+        res.render('list', data);
+    });
 
 
-router.get('/test', function (req, res, next) {
-    res.json(data);
-});
+    router.get('/test', function (req, res, next) {
+        res.json(data);
+    });
+})
+
 
 module.exports = router;
