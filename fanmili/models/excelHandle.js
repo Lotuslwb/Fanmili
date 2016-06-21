@@ -33,7 +33,7 @@ for (var cells in worksheet) {
                 cellsJSON.tel = value;
                 break;
             case 'C':
-                cellsJSON.others = value;
+                cellsJSON.type = value;
                 break;
         }
     }

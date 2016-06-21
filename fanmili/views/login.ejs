@@ -1,0 +1,59 @@
+<%- include("header.ejs",{"title":title}) %>
+
+<div class="register">
+    <form id="loginForm">
+        <div class="weui_cells_title">用户登录</div>
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_hd">
+                    <label for="" class="weui_label">用户名</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input type="text" name="username" class="weui_input" required="" placeholder="请输入用户名">
+                </div>
+                <div class="weui_cell_ft">
+                    <i class="weui_icon_warn"></i>
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_hd">
+                    <label for="" class="weui_label">手机号</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input type="tel" name="tel" class="weui_input" required="" pattern="[\d]{8,11}"
+                           notmatchtips="请输入正确的手机号" placeholder="请输入手机号">
+                </div>
+                <div class="weui_cell_ft">
+                    <i class="weui_icon_warn"></i>
+                </div>
+            </div>
+        </div>
+        <p class="weui_cells_tips">一次登录,3个月之内免登陆;不能切换用户</p>
+
+        <div class="weui_btn_area">
+            <a href="javascript:;" class="weui_btn weui_btn_primary J-submit">登录</a>
+        </div>
+    </form>
+</div>
+<script src="/javascripts/jquery.js"></script>
+<script>
+
+    $('.J-submit').click(function () {
+        var dataArray = $('#loginForm').serializeArray();
+        var data = $('#loginForm').serialize();
+        var url = '/login/login';
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function (data) {
+                console.log(data);
+            },
+            dataType: 'json'
+        });
+    });
+
+</script>
+
+<%- include footer.ejs %>

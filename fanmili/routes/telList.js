@@ -1,49 +1,44 @@
 var express = require('express');
 var router = express.Router();
+var _ = require('lodash');
+
+
 //数据库处理
 var Person = require('../models/DB');
-//excel JSON
-var excelJSON = require('../models/excelHandle');
-//excel Array
-var excelArray = [];
 
-for (var key in excelJSON) {
-    var item = excelJSON[key];
-    if (item) {
-        var obj = {
-            name: item.name || '',
-            tel: item.tel || '',
-            gender: '未知',
-            age: '真的是未知!!'
-        };
-        excelArray.push(obj);
-    }
-}
 
 /* GET home page. */
 var user = new Person();
 
-user.User.collection.insert(excelArray, function (err, docs) {
+router.get('/list', function (req, res, next) {
+    user.find({}).then(function (docs) {
+        var data = {
+            title: '电话列表', telList: docs
+        }
+        res.json(data);
+    })
+});
 
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('批量插入成功!');
-        user.find({}, function (err, docs) {
-            var data = {
-                title: 'telList', telList: docs
+router.get('/', function (req, res, next) {
+    user.find({}).then(function (docs) {
+        var types = [];
+        var telList = {};
+        _.each(docs, function (n, e) {
+
+            var data = (JSON.parse(JSON.stringify(n)));
+
+            if (_.indexOf(types, data.type) < 0) {
+                types.push(data.type);
+                telList[data.type] = new Array();
             }
-            router.get('/', function (req, res, next) {
-                res.render('list', data);
-            });
+            telList[data.type].push(data);
 
-
-            router.get('/test', function (req, res, next) {
-                res.json(data);
-            });
         })
-    }
-
+        var data = {
+            title: '电话列表', telList: telList, types: types
+        }
+        res.render('list', data);
+    })
 });
 
 

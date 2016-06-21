@@ -1,43 +1,138 @@
-<%- include header.ejs %>
+<%- include("header.ejs",{"title":title}) %>
 
 
-<div class="hd">
-    <h1 class="page_title"><%= title %></h1>
+<!--<div class="hd">-->
+<!--<h1 class="page_title"><%= title %></h1>-->
+<!--</div>-->
+
+<div class="searchbar">
+    <div class="weui_mask search_mask"></div>
+    <div class="weui_search_bar weui_search_focusing" id="search_bar">
+        <form class="weui_search_outer">
+            <div class="weui_search_inner">
+                <i class="weui_icon_search"></i>
+                <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required="">
+                <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+            </div>
+        </form>
+        <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+    </div>
+    <div class="weui_cells weui_cells_access search_show" id="search_show" style="display: none;">
+
+    </div>
 </div>
 
 
-<div class="weui_panel weui_panel_access">
-    <!--<div class="weui_panel_hd">图文组合列表</div>-->
-    <div class="weui_panel_bd">
-        <% for(var i = 0; i < telList.length;i++){ %>
-        <a href="tel:<%= telList[i].tel %>" class="weui_media_box weui_media_appmsg">
-            <div class="weui_media_hd">
-                <img class="weui_media_appmsg_thumb"
-                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg=="
-                     alt="">
-            </div>
-            <div class="weui_media_bd">
-                <h4 class="weui_media_title"><%= telList[i].name %></h4>
-                <p class="weui_media_desc">电话:<%= telList[i].tel %></p>
-            </div>
-        </a>
+<div class="weui_tab tellist">
+    <div class="weui_navbar">
+        <% for(var i = 0; i < types.length;i++){ %>
+        <div class="weui_navbar_item  <% if(i == 0){ %> weui_bar_item_on <% } %>">
+            <%= types[i] %>
+        </div>
         <% } %>
     </div>
-    <!--<a class="weui_panel_ft" href="javascript:void(0);">查看更多</a>-->
+    <div class="weui_tab_bd">
+        <% for (var key in telList){ %>
+        <% var item = telList[key]; %>
+        <div class="weui_panel weui_panel_access">
+            <!--<div class="weui_panel_hd">图文组合列表</div>-->
+            <div class="weui_panel_bd">
+                <% for(var i = 0; i < item.length;i++){ %>
+                <a href="tel:<%= item[i].tel %>" class="weui_media_box weui_media_appmsg">
+                    <div class="weui_media_hd">
+                        <img class="weui_media_appmsg_thumb"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg=="
+                             alt="">
+                    </div>
+                    <div class="weui_media_bd">
+                        <h4 class="weui_media_title"><%= item[i].name %></h4>
+                        <p class="weui_media_desc">电话:<%= item[i].tel %></p>
+                    </div>
+                </a>
+                <% } %>
+            </div>
+            <!--<a class="weui_panel_ft" href="javascript:void(0);">查看更多</a>-->
+        </div>
+        <% } %>
+    </div>
 </div>
 
-<%- include footer.ejs %>
 
 <script src="/javascripts/jquery.js"></script>
 <script>
-    var url = '/telList/test';
+
+
+    var url = '/telList/list';
+    var allData;
     $.ajax({
         type: 'GET',
         url: url,
         data: {},
         success: function (data) {
-            console.log(data.title);
+            allData = data.telList;
         },
         dataType: 'json'
     });
+
+    var index = $('.weui_navbar_item.weui_bar_item_on').index();
+    $('.weui_tab_bd').find('.weui_panel').eq(index).addClass('active').siblings().removeClass('active')
+
+    $('.weui_navbar_item').on('click', function () {
+        var index = $(this).index();
+        $(this).addClass('weui_bar_item_on').siblings('.weui_navbar_item').removeClass('weui_bar_item_on');
+        $('.weui_tab_bd').find('.weui_panel').eq(index).addClass('active').siblings().removeClass('active');
+    });
+
+    $('body').on('focus', '#search_input', function () {
+        var $weuiSearchBar = $('#search_bar');
+        $weuiSearchBar.addClass('weui_search_focusing');
+    }).on('blur', '#search_input', function () {
+        var $weuiSearchBar = $('#search_bar');
+        $weuiSearchBar.removeClass('weui_search_focusing');
+        if ($(this).val()) {
+            $('#search_text').hide();
+        } else {
+            $('#search_text').show();
+        }
+    }).on('input', '#search_input', function () {
+        var $searchShow = $("#search_show");
+        var $mask = $('.search_mask');
+        var v = $(this).val();
+        if ($(this).val()) {
+            var str = genList(allData);
+            var data = [];
+            $.each(allData, function (e, n) {
+                if (JSON.stringify(n).indexOf(v) >= 0) {
+                    data.push(n);
+                }
+            });
+            var str = genList(data);
+            $('#search_show').html(str);
+
+            $searchShow.show();
+            $mask.show();
+
+        } else {
+            $searchShow.hide();
+            $mask.hide();
+        }
+    }).on('click', '#search_cancel', function () {
+        $("#search_show").hide();
+        $('.search_mask').hide();
+        $('#search_input').val('');
+    }).on('click', '#search_clear', function () {
+        $("#search_show").hide();
+        $('.search_mask').hide();
+        $('#search_input').val('');
+    });
+
+    function genList(data) {
+        var str = '';
+        for (var i = 0; i < data.length; i++) {
+            str += '<a href="tel:' + data[i].tel + '" class="weui_cell"> <div class="weui_cell_bd weui_cell_primary"> <p>' + data[i].name + '</p> </div> </a>';
+        }
+        return str;
+    }
 </script>
+
+<%- include footer.ejs %>

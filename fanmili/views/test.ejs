@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- Copyright 2010 Nicholas C. Zakas. All rights reserved. BSD Licensed. -->
+<!-- modified by wushufeng 2014-07-01. -->
+<html>
+<title><%= title %></title>
+<meta charset="UTF-8">
+<body>
+<%= title %>
+<script type="text/javascript">
+    (function () {
+        function handleRequest(event) {
+            try {
+                var data = JSON.parse(event.data);
+                var storage = localStorage;
+
+                if (data.op === 'W') { //写操作
+                    storage.setItem(data.key, JSON.stringify(data.value));
+                    event.source.postMessage(event.data, event.origin);
+                } else if (data.op === 'D') { //删除
+                    storage.removeItem(data.key);
+                    event.source.postMessage(event.data, event.origin);
+                } else if (data.op === 'X') { //清空
+                    storage.clear();
+                    event.source.postMessage(event.data, event.origin);
+                } else {//默认：读操作
+                    var value = JSON.parse(storage.getItem(data.key));
+                    event.source.postMessage(JSON.stringify({id: data.id, key: data.key, value: value}), event.origin);
+                }
+            } catch (e) {
+                event.source.postMessage(event.data, event.origin);
+            }
+        }
+
+        if (window.addEventListener) {
+            window.addEventListener("message", handleRequest, false);
+        } else if (window.attachEvent) {
+            window.attachEvent("onmessage", handleRequest);
+        }
+    })();
+</script>
+</body>
+</html>

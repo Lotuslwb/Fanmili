@@ -16,6 +16,7 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "lodash": "^4.13.1",
     "mongodb": "^2.1.21",
     "mongoose": "^4.4.20",
     "xlsx": "^0.8.0"

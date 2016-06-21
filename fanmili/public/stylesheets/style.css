@@ -1,0 +1,43 @@
+.hd {
+    padding: 1em 0;
+}
+
+.page_title {
+    text-align: center;
+    font-size: 34px;
+    color: #3cc51f;
+    font-weight: 400;
+    margin: 0 15%;
+}
+
+.tellist {
+
+}
+
+.tellist .weui_panel {
+    margin-top: 0;
+    display: none;
+}
+
+.tellist .weui_panel.active {
+    display: block;
+}
+
+.searchbar .weui_search_bar {
+    z-index: 99;
+}
+
+.searchbar {
+    position: relative;
+    z-index: 2;
+}
+.searchbar .search_mask{
+    display: none;
+}
+.searchbar .weui_cells{
+    z-index: 10;
+    margin-top: 0;
+}
+.searchbar .weui_cell_bd{
+
+}
