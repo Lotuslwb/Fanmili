@@ -4,7 +4,7 @@
 var _ = require('lodash');
 
 //数据库处理
-var Person = require('../models/DB');
+var user = require('../models/DB');
 //excel JSON
 var excelJSON = require('../models/excelHandle');
 //excel Array
@@ -23,10 +23,6 @@ for (var key in excelJSON) {
         excelArray.push(obj);
     }
 }
-
-/* GET home page. */
-var user = new Person();
-
 
 user.find({}).then(function (docs) {
     excelArray = _.filter(excelArray, function (n) {

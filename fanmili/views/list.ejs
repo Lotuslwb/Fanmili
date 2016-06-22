@@ -129,7 +129,7 @@
     function genList(data) {
         var str = '';
         for (var i = 0; i < data.length; i++) {
-            str += '<a href="tel:' + data[i].tel + '" class="weui_cell"> <div class="weui_cell_bd weui_cell_primary"> <p>' + data[i].name + '</p> </div> </a>';
+            str += '<a href="tel:' + data[i].tel + '" class="weui_cell"> <div class="weui_cell_bd weui_cell_primary"> <p>' + data[i].name + ':' + data[i].tel + '</p> </div> </a>';
         }
         return str;
     }

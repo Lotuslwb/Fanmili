@@ -1,11 +1,43 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<%- include("header.ejs",{"title":title}) %>
+
+<div class="weui_panel_hd">你好,<%= name %></div>
+
+
+<div class="container" id="index-page">
+    <div class="home">
+        <div class="hd">
+            <h1 class="page_title">O2O</h1>
+            <p class="page_desc">移动办公平台</p>
+        </div>
+        <div class="bd">
+            <div class="weui_grids">
+                <a href="/tellist" class="weui_grid">
+                    <div class="weui_grid_icon">
+                        <i class="icon icon_button"></i>
+                    </div>
+                    <p class="weui_grid_label">
+                        人员信息
+                    </p>
+                </a>
+                <a href="/tellist" class="weui_grid">
+                    <div class="weui_grid_icon">
+                        <i class="icon icon_button"></i>
+                    </div>
+                    <p class="weui_grid_label">
+                        人员信息
+                    </p>
+                </a>
+                <a href="/tellist" class="weui_grid">
+                    <div class="weui_grid_icon">
+                        <i class="icon icon_button"></i>
+                    </div>
+                    <p class="weui_grid_label">
+                        人员信息
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include footer.ejs %>

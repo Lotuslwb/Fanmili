@@ -75,5 +75,7 @@ Person.prototype.remove = function (json, callback) {
     return promise;
 }
 
+var user = new Person();
 
-module.exports = Person;
+
+module.exports = user;

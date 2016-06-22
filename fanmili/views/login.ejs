@@ -1,15 +1,17 @@
 <%- include("header.ejs",{"title":title}) %>
 
 <div class="register">
-    <form id="loginForm">
+
+    <form id="loginForm" method="post">
         <div class="weui_cells_title">用户登录</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_hd">
-                    <label for="" class="weui_label">用户名</label>
+                    <label for="username" class="weui_label">用户名</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input type="text" name="username" class="weui_input" required="" placeholder="请输入用户名">
+                    <input type="text" name="username" id="username" class="weui_input" required=""
+                           placeholder="请输入用户名">
                 </div>
                 <div class="weui_cell_ft">
                     <i class="weui_icon_warn"></i>
@@ -17,11 +19,11 @@
             </div>
             <div class="weui_cell">
                 <div class="weui_cell_hd">
-                    <label for="" class="weui_label">手机号</label>
+                    <label for="tel" class="weui_label">手机号</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
                     <input type="tel" name="tel" class="weui_input" required="" pattern="[\d]{8,11}"
-                           notmatchtips="请输入正确的手机号" placeholder="请输入手机号">
+                           notmatchtips="请输入正确的手机号" placeholder="请输入手机号" id="tel">
                 </div>
                 <div class="weui_cell_ft">
                     <i class="weui_icon_warn"></i>
@@ -35,24 +37,63 @@
         </div>
     </form>
 </div>
+
+<div class="weui_toptips weui_warn J-warn"></div>
+
+
 <script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/cookie.js"></script>
+<script src="/javascripts/api.js"></script>
+
 <script>
 
+    var params = window.oo.GetRequest();
+    var redirect = params.redirect;
+
+
     $('.J-submit').click(function () {
-        var dataArray = $('#loginForm').serializeArray();
         var data = $('#loginForm').serialize();
         var url = '/login/login';
+        var name = $('#username').val();
+        var tel = $("#tel").val()
+
+        if (!name) {
+            showmsg('请输入用户名');
+            return false;
+        }
+
+        if (!tel) {
+            showmsg('请输入手机号');
+            return false;
+        }
 
         $.ajax({
             type: 'POST',
             url: url,
-            data: data,
+            data: {name: name, tel: tel},
             success: function (data) {
-                console.log(data);
+                if (data.respCode == 200) {
+                    window.Cookies.setCookie('docs', JSON.stringify({name: name, tel: tel}), 90);
+                    if (redirect) {
+                        window.location.href = redirect;
+                    } else {
+                        window.location.href = '/';
+                    }
+
+                } else {
+                    showmsg(data.respStatus);
+                }
             },
             dataType: 'json'
         });
     });
+
+    function showmsg(msg) {
+        $('.J-warn').text(msg).fadeIn();
+        setTimeout(function () {
+            $('.J-warn').fadeOut();
+        }, 1200)
+    }
 
 </script>
 
