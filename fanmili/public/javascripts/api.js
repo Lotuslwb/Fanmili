@@ -2,9 +2,17 @@
  * Created by lotuslwb on 16/6/22.
  */
 window.oo = {
-    GetRequest: GetRequest
+    GetRequest: GetRequest,
+    fastClick: fastClick
 }
 
+
+function fastClick() {
+    var touchObj = {};
+    touchObj.isSupportTouch = "ontouchend" in document ? true : false;
+    touchObj.isEvent = touchObj.isSupportTouch ? 'touchstart' : 'click';
+    return touchObj.isEvent;
+}
 
 function GetRequest() {
     var url = location.search; //获取url中"?"符后的字串

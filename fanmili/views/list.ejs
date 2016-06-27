@@ -59,11 +59,13 @@
 
 
 <script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/api.js"></script>
 <script>
 
 
     var url = '/telList/list';
     var allData;
+    var fastClick = window.oo.fastClick();
     $.ajax({
         type: 'GET',
         url: url,
@@ -77,7 +79,7 @@
     var index = $('.weui_navbar_item.weui_bar_item_on').index();
     $('.weui_tab_bd').find('.weui_panel').eq(index).addClass('active').siblings().removeClass('active')
 
-    $('.weui_navbar_item').on('click', function () {
+    $('.weui_navbar_item').on(fastClick, function () {
         var index = $(this).index();
         $(this).addClass('weui_bar_item_on').siblings('.weui_navbar_item').removeClass('weui_bar_item_on');
         $('.weui_tab_bd').find('.weui_panel').eq(index).addClass('active').siblings().removeClass('active');
@@ -116,11 +118,11 @@
             $searchShow.hide();
             $mask.hide();
         }
-    }).on('click', '#search_cancel', function () {
+    }).on(fastClick, '#search_cancel', function () {
         $("#search_show").hide();
         $('.search_mask').hide();
         $('#search_input').val('');
-    }).on('click', '#search_clear', function () {
+    }).on(fastClick, '#search_clear', function () {
         $("#search_show").hide();
         $('.search_mask').hide();
         $('#search_input').val('');

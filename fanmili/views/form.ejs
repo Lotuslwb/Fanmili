@@ -1,0 +1,69 @@
+<%- include("header.ejs",{"title":title}) %>
+
+<h1 class="page_title">标题</h1>
+
+<div class="weui_panel">
+    <div class="weui_panel_bd">
+        <div class="weui_media_box weui_media_text">
+            <h4 class="weui_media_title">标题一</h4>
+            <p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+        </div>
+    </div>
+</div>
+
+<form action="form/data" method="post" id="form">
+
+    <div class="weui_cells_title" style="margin-top: 50px;">表单</div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd"><label class="weui_label" for="mac1">MAC 地址1</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="text" placeholder="请输入MAC" id="mac1" name="mac1">
+        </div>
+    </div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd"><label class="weui_label" for="mac2">MAC 地址2</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="text" placeholder="请输入MAC" id="mac2" name="mac2">
+        </div>
+    </div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd"><label class="weui_label" for="mac3">MAC 地址3</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="text" placeholder="请输入MAC" id="mac3" name="mac3">
+        </div>
+    </div>
+
+    <div class="weui_btn_area">
+        <a class="weui_btn weui_btn_primary" href="javascript:" id="J-submit">确定</a>
+    </div>
+</form>
+<div class="weui_toptips weui_warn J-warn"></div>
+
+
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/api.js"></script>
+<script>
+
+
+    $('#J-submit').click(function () {
+        var macArray = [$('#mac1').val(), $('#mac2').val(), $('#mac3').val()];
+        if (macArray[0].length + macArray[1].length + macArray[2].length <= 0) {
+            showmsg('至少输入一个mac地址再提交');
+        } else {
+            $('#form').submit();
+//            window.location.href = 'form/form_s';
+        }
+    })
+
+    function showmsg(msg) {
+        $('.J-warn').text(msg).fadeIn();
+        setTimeout(function () {
+            $('.J-warn').fadeOut();
+        }, 1200)
+    }
+</script>
+
+<%- include footer.ejs %>
