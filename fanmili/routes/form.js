@@ -34,8 +34,12 @@ router.get('/form_s', function (req, res, next) {
     })
 });
 
-/*  POST Data */
 router.get('/data', function (req, res, next) {
+    res.redirect('/')
+})
+
+/*  POST Data */
+router.post('/data', function (req, res, next) {
     var cookies = JSON.parse(req.cookies.docs);
     var data = {
         'name': cookies.name,
