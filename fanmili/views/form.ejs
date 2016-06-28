@@ -1,19 +1,42 @@
 <%- include("header.ejs",{"title":title}) %>
 
-<h1 class="page_title">标题</h1>
+<style>
+    .page_title {
+        text-align: center;
+        font-size: 24px;
+        color: #3cc51f;
+        font-weight: 400;
+        margin: 0 15%;
+        margin-top: 30px;
+    }
+
+    .weui_media_box .weui_media_desc {
+        -webkit-line-clamp: inherit;
+        line-height: 1.5;
+        font-size: 14px;
+        /*color: #444;*/
+    }
+
+    .red {
+        color: red;
+    }
+</style>
+<h1 class="page_title">来个绅士的契约吧！</h1>
 
 <div class="weui_panel">
     <div class="weui_panel_bd">
         <div class="weui_media_box weui_media_text">
-            <h4 class="weui_media_title">标题一</h4>
-            <p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+            <!--<h4 class="weui_media_title">标题一</h4>-->
+            <p class="weui_media_desc">
+                Hello小主，我是你的Wi-Fi小宠fighting，我因你的业务之需使劲使劲来到这里，所以请不要劫持我的流量去往<span class="red">视频、#%@&站点</span>...因为我的自制力还太弱，会不慎影响到阿拉系统的稳定性。上面说，若是小主被线上监控或线下警力活捉，那可是要剁手的！！！ <span class="red">首次剁手费1000元人民币</span>呢，要是再次发现，说不定就是英镑了，ohohoh...虽然英镑是跌了，dan还是疼的呢...如果小主的Verbal
+                Reasoning能力还不错的话，就当我们的契约即刻生效啦！赶紧把你终端的MAC地址填在下方空格中，每人最多可绑定3个哦！</p>
         </div>
     </div>
 </div>
 
 <form action="form/data" method="post" id="form">
 
-    <div class="weui_cells_title" style="margin-top: 50px;">表单</div>
+    <!--<div class="weui_cells_title" style="margin-top: 50px;"></div>-->
 
     <div class="weui_cell">
         <div class="weui_cell_hd"><label class="weui_label" for="mac1">MAC 地址1</label></div>
