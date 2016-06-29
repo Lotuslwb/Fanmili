@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
         if (isLogin) {
             var cookies = req.cookies;
             var data = JSON.parse(cookies.docs);
-            data.title = '表单一个';
+            data.title = 'mac地址提交';
             res.render('form', data);
         } else {
             Login.gotoLogin(req, res);

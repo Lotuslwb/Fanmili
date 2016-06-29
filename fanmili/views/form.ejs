@@ -28,8 +28,12 @@
         <div class="weui_media_box weui_media_text">
             <!--<h4 class="weui_media_title">标题一</h4>-->
             <p class="weui_media_desc">
-                Hello小主，我是你的Wi-Fi小宠fighting，我因你的业务之需使劲使劲来到这里，所以请不要劫持我的流量去往<span class="red">视频、#%@&站点</span>...因为我的自制力还太弱，会不慎影响到阿拉系统的稳定性。上面说，若是小主被线上监控或线下警力活捉，那可是要剁手的！！！ <span class="red">首次剁手费1000元人民币</span>呢，要是再次发现，说不定就是英镑了，ohohoh...虽然英镑是跌了，dan还是疼的呢...如果小主的Verbal
+                Hello小主，我是你的Wi-Fi小宠fighting，我因你的业务之需使劲使劲来到这里，所以请不要劫持我的流量去往<span class="red">视频、#%@&站点</span>...因为我的自制力还太弱，会不慎影响到阿拉系统的稳定性。上面说，若是小主被线上监控或线下警力活捉，那可是要剁手的！！！
+                <span class="red">首次剁手费1000元人民币</span>呢，要是再次发现，说不定就是英镑了，ohohoh...虽然英镑是跌了，dan还是疼的呢...如果小主的Verbal
                 Reasoning能力还不错的话，就当我们的契约即刻生效啦！赶紧把你终端的MAC地址填在下方空格中，每人最多可绑定3个哦！</p>
+        </div>
+        <div class="weui_media_box weui_media_text red">
+            请将按以下格式输入 <br/> <b>d003:4bae:f2cd</b>
         </div>
     </div>
 </div>
@@ -75,9 +79,15 @@
         var macArray = [$('#mac1').val(), $('#mac2').val(), $('#mac3').val()];
         if (macArray[0].length + macArray[1].length + macArray[2].length <= 0) {
             showmsg('至少输入一个mac地址再提交');
+        } else if ((macArray[0].length > 0 && macArray[0].indexOf(':') < 0 ) || (macArray[1].length > 0 && macArray[1].indexOf(':') < 0 ) || (macArray[2].length > 0 && macArray[2].indexOf(':') < 0)) {
+            showmsg('mac地址格式不对');
         } else {
+
+            macArray[0] = macArray[0].toLowerCase();
+            macArray[1] = macArray[0].toLowerCase();
+            macArray[2] = macArray[0].toLowerCase();
             $('#form').submit();
-//            window.location.href = 'form/form_s';
+
         }
     })
 
