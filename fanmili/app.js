@@ -11,6 +11,7 @@ var telList = require('./routes/telList');
 var login = require('./routes/login');
 var bookroom = require('./routes/bookroom');
 var form = require('./routes/form');
+var admin = require('./routes/admin');
 
 var app = express();
 
@@ -31,7 +32,8 @@ app.use('/users', users);
 app.use('/telList', telList);
 app.use('/login', login);
 app.use('/bookroom', bookroom);
-app.use('/form', form)
+app.use('/form', form);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
